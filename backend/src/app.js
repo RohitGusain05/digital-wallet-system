@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const healthRoutes = require('./routes/health.routes');
 const authRoutes = require('./routes/auth.routes');
+const walletRoutes = require('./routes/wallet.routes');
 const errorHandler = require('./middleware/error.middleware');
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (_req, res) => {
 
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/wallet', walletRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({
