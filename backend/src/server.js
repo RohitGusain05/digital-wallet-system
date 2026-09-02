@@ -4,14 +4,15 @@ const app = require('./app');
 const { connectPostgreSQL, connectMongoDB, closeDatabases } = require('./config/db');
 
 const PORT = Number(process.env.PORT) || 5000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 const startServer = async () => {
   try {
     await connectPostgreSQL();
     await connectMongoDB();
 
-    const server = app.listen(PORT, () => {
-      console.log(`Digital Wallet API listening on port ${PORT}`);
+    const server = app.listen(PORT, HOST, () => {
+      console.log(`Digital Wallet API listening on ${HOST}:${PORT}`);
     });
 
     const shutdown = async (signal) => {
